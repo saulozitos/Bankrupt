@@ -2,7 +2,9 @@
 
 #include "board.h"
 #include "player.h"
+
 #include <memory>
+
 class Game
 {
 public:
@@ -12,10 +14,7 @@ public:
     void rollDice(Player *player);
     unsigned short getRentValue();
     unsigned short getPurchaseValue();
-
-    unsigned short getTotalPlayers() const;
     void setTotalPlayers(unsigned short value);
-
     bool isGameOver();
 
 private:

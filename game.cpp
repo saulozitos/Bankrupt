@@ -1,8 +1,9 @@
 #include "game.h"
+
 #include <iostream>
 #include <random>
 
-constexpr unsigned short IS_DEBUG = 0;
+#define IS_DEBUG false
 
 Game::Game(const std::string &file) :
     board(std::make_unique<Board>(file)),
@@ -21,7 +22,7 @@ void Game::play(Player *player)
 
     const auto playerCoins = player->getCoins();
 
-    #ifdef IS_DEBUG
+    #if IS_DEBUG
         std::cout << player->getId() << " - Coins: " << playerCoins << std::endl;
     #endif
 
@@ -35,7 +36,7 @@ void Game::play(Player *player)
             player->setCoins(playerCoins - purchaseValue);
             setOwner(player);
         }
-        #ifdef IS_DEBUG
+        #if IS_DEBUG
         else
         {
             std::cout << "Insufficient coins to buy!" << std::endl;
@@ -51,7 +52,7 @@ void Game::play(Player *player)
             const auto rentValue = getRentValue();
             if(playerCoins > rentValue)
             {
-                #ifdef IS_DEBUG
+                #if IS_DEBUG
                     std::cout<< player->getId() << " making payment of " << rentValue << " coins to " << owner->getId() << std::endl;
                 #endif
                 const auto newCoins = owner->getCoins() + rentValue;
@@ -62,14 +63,14 @@ void Game::play(Player *player)
             {
                 const auto newCoins = owner->getCoins() + rentValue;
 
-                #ifdef IS_DEBUG
+                #if IS_DEBUG
                     std::cout<< player->getId() << " making payment of " << rentValue << " coins to " << owner->getId() << "  and exiting the game!" << std::endl;
                 #endif
 
                 player->setCoins(playerCoins - rentValue);
                 player->setIsOut(true);
 
-                #ifdef IS_DEBUG
+                #if IS_DEBUG
                     std::cout << player->getId() << " is now out of the game!" << std::endl;
                 #endif
 
@@ -78,7 +79,7 @@ void Game::play(Player *player)
                 releaseAcquisitions(player);
             }
         }
-        #ifdef IS_DEBUG
+        #if IS_DEBUG
         else
         {
             std::cout << "Nothing to do!" << std::endl;
@@ -101,7 +102,7 @@ void Game::rollDice(Player *player)
     std::uniform_int_distribution<int> uniform_dist(1, 6);
     const auto value = uniform_dist(e1);
 
-#ifdef IS_DEBUG
+#if IS_DEBUG
     std::cout << "\nDice value: " << value << std::endl;
 #endif
 
@@ -113,7 +114,7 @@ void Game::rollDice(Player *player)
         position = position - 19;
     }
 
-#ifdef IS_DEBUG
+#if IS_DEBUG
     std::cout << player->getId() << " in position " << player->getPosition() << " go to position " << position << " - Position information:" << std::endl;
 
     if(itsBuyable())
@@ -138,11 +139,6 @@ unsigned short Game::getPurchaseValue()
     return board->data[position].second.first;
 }
 
-unsigned short Game::getTotalPlayers() const
-{
-    return totalPlayers;
-}
-
 void Game::setTotalPlayers(unsigned short value)
 {
     totalPlayers = value;
@@ -150,7 +146,7 @@ void Game::setTotalPlayers(unsigned short value)
 
 bool Game::isGameOver()
 {
-    return isOut == getTotalPlayers() - 1;
+    return isOut == totalPlayers - 1;
 }
 
 bool Game::itsBuyable()
@@ -160,7 +156,7 @@ bool Game::itsBuyable()
 
 void Game::setOwner(Player *player)
 {
-#ifdef IS_DEBUG
+#if IS_DEBUG
     std::cout << player->getId() << " buying property " << position << "!" << std::endl;
 #endif
     board->data[position].first.first = player;
@@ -178,7 +174,7 @@ void Game::releaseAcquisitions(Player *player)
     const auto proterties = player->getProperties();
     for(const auto &it : player->getProperties())
     {
-        #ifdef IS_DEBUG
+        #if IS_DEBUG
             std::cout << "Releasing property " << it << " of " << player->getId() <<std::endl;
         #endif
         board->data[it].first.first = nullptr;
