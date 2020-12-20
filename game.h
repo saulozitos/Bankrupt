@@ -1,6 +1,11 @@
 #pragma once
 
 #include "board.h"
+<<<<<<< HEAD
+=======
+
+class Player;
+>>>>>>> 164d1a5e3b8c5da12dbf5b2a52357b11bb5442c3
 
 class Player;
 

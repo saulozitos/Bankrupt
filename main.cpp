@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "game.h"
+#include "player.h"
 
 int main() {
   const std::string fileConfiguration =
