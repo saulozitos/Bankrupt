@@ -47,7 +47,9 @@ int main() {
 
     for (unsigned short match = 1; match <= totalMatch; ++match)
     {
-        std::cout << "\nRunning simulation #" << match << std::endl;
+        #if DEBUG
+                std::cout << "\nRunning simulation #" << match << std::endl;
+        #endif
         while (!game->isGameOver() && round < timeOutRound) {
             for (const auto &it : players) {
                 game->play(it);

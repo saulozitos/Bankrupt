@@ -4,8 +4,6 @@
 #include <random>
 #include <memory>
 
-#define DEBUG true
-
 Game::Game(const std::string &file) : Board(file),
     position(0),
     totalPlayers(0),
