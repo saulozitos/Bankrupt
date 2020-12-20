@@ -63,3 +63,4 @@ Makefile*
 *.prl
 
 *.idea/
+*build/*
