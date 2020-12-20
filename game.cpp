@@ -5,8 +5,7 @@
 
 #define IS_DEBUG false
 
-Game::Game(const std::string &file) :
-    board(std::make_unique<Board>(file)),
+Game::Game(const std::string &file) : Board(file),
     position(0),
     totalPlayers(0),
     isOut(0)
@@ -131,12 +130,12 @@ void Game::rollDice(Player *player)
 
 unsigned short Game::getRentValue()
 {
-    return board->data[position].second.second;
+    return boardData[position].second.second;
 }
 
 unsigned short Game::getPurchaseValue()
 {
-    return board->data[position].second.first;
+    return boardData[position].second.first;
 }
 
 void Game::setTotalPlayers(unsigned short value)
@@ -151,7 +150,7 @@ bool Game::isGameOver()
 
 bool Game::itsBuyable()
 {
-    return board->data[position].first.second;
+    return boardData[position].first.second;
 }
 
 void Game::setOwner(Player *player)
@@ -159,14 +158,14 @@ void Game::setOwner(Player *player)
 #if IS_DEBUG
     std::cout << player->getId() << " buying property " << position << "!" << std::endl;
 #endif
-    board->data[position].first.first = player;
-    board->data[position].first.second = false;
+    boardData[position].first.first = player;
+    boardData[position].first.second = false;
     player->setProperties(position);
 }
 
 Player *Game::getOwnerOfProperty()
 {
-    return board->data[position].first.first;
+    return boardData[position].first.first;
 }
 
 void Game::releaseAcquisitions(Player *player)
@@ -177,7 +176,7 @@ void Game::releaseAcquisitions(Player *player)
         #if IS_DEBUG
             std::cout << "Releasing property " << it << " of " << player->getId() <<std::endl;
         #endif
-        board->data[it].first.first = nullptr;
-        board->data[it].first.second = true;
+        boardData[it].first.first = nullptr;
+        boardData[it].first.second = true;
     }
 }

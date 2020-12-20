@@ -1,18 +1,14 @@
 #include <iostream>
+
 #include <algorithm>
 #include <memory>
 #include <map>
 
 #include "game.h"
 
-unsigned short rollDice()
-{
-    return (std::rand() % 6) + 1;
-}
-
 int main()
 {
-    const auto *const fileConfiguration = "/home/saulo/Dev/Bankrupt/gameConfig.txt";
+    const std::string fileConfiguration = "/home/saulo/Dev/Bankrupt/gameConfig.txt";
     auto game = std::make_unique<Game>(fileConfiguration);
 
     // ​Compra qualquer propriedade sobre a qual ele parar.
@@ -112,7 +108,7 @@ int main()
     int totalTimeOutWins{0};
     int totalNormalWins{0};
 
-    std::cout << "\nGamer analysis:" << std::endl;
+    std::cout << "\nGame analysis:" << std::endl;
     for(const auto &it : countWins)
     {
         const auto playerName = it.first;

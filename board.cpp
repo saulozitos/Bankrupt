@@ -17,7 +17,7 @@ void Board::loadConfigurationFile(const std::string_view f)
         int rentValue{0};
 
         while(file >> purchaseValue >> rentValue)
-            data.push_back(std::make_pair(
+            boardData.push_back(std::make_pair(
                                     std::make_pair(nullptr, true),
                                     std::make_pair(purchaseValue, rentValue)));
     }

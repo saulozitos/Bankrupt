@@ -3,12 +3,11 @@
 #include "board.h"
 #include "player.h"
 
-#include <memory>
-
-class Game
+class Game : public Board
 {
 public:
     explicit Game(const std::string &file);
+    ~Game() = default;
 
     void play(Player *player);
     void rollDice(Player *player);
@@ -18,7 +17,6 @@ public:
     bool isGameOver();
 
 private:
-    std::unique_ptr<Board>board;
     int position;
     unsigned short totalPlayers;
     unsigned short isOut;
