@@ -10,7 +10,7 @@
 
 int main() {
   const std::string fileConfiguration =
-      "/home/andreagenor/code/tmp/Bankrupt/gameConfig.txt";
+      "/home/saulo/Dev/Bankrupt/gameConfig.txt";
   auto game = std::make_unique<Game>(fileConfiguration);
 
   // ​Compra qualquer propriedade sobre a qual ele parar.
