@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include <string_view>
 #include <player.h>
 
 class Board
