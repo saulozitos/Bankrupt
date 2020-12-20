@@ -32,7 +32,7 @@ int main() {
 
     game->setTotalPlayers(players.size());
 
-    unsigned short totalMatch{5};
+    unsigned short totalMatch{300};
     unsigned short round{0};
     unsigned short timeOutRound{1000};
     unsigned short totalRounds{0};
