@@ -46,10 +46,10 @@ int main()
                 const auto rentValue = game->getRentValue();
                 const auto purchaseValue = game->getPurchaseValue();
 
-                game->getPlayer(namePlayer1)->setShouldIBuy(true);
-                game->getPlayer(namePlayer2)->setShouldIBuy(rentValue > 50);
-                game->getPlayer(namePlayer3)->setShouldIBuy(game->getPlayer(namePlayer3)->getCoins() - purchaseValue >= 80);
-                game->getPlayer(namePlayer4)->setShouldIBuy(round % 2 == 0);
+                game->setShouldIBuy(namePlayer1, true);
+                game->setShouldIBuy(namePlayer2, rentValue > 50);
+                game->setShouldIBuy(namePlayer3, game->getPlayer(namePlayer3)->getCoins() - purchaseValue >= 80);
+                game->setShouldIBuy(namePlayer4, round % 2 == 0);
             }
             round++;
         }
