@@ -2,7 +2,7 @@
 #include <string_view>
 #include <memory>
 #include "game.h"
-class Game;
+
 class Simulation
 {
 public:

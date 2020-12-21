@@ -3,6 +3,7 @@
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include "game.h"
 
 Simulation::Simulation(const std::string_view &file) :
     fileConfiguration(file),
