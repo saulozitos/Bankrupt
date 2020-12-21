@@ -1,6 +1,3 @@
-<!-- Copy and paste the converted output. -->
-
-
 **Instruções de execução/compilação**
 
  
