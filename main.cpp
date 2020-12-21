@@ -8,9 +8,9 @@
 #include "game.h"
 #include "player.h"
 
-int main() {
-    const std::string fileConfiguration =
-            "/home/saulo/Dev/Bankrupt/gameConfig.txt";
+int main()
+{
+    const std::string fileConfiguration = "/home/saulo/Dev/Bankrupt/gameConfig.txt";
     auto game = std::make_unique<Game>(fileConfiguration);
 
     // ​Compra qualquer propriedade sobre a qual ele parar.
@@ -27,8 +27,7 @@ int main() {
     // Compra a propriedade de maneira aleatória, com probabilidade de​ ​50%.
     auto player4 = std::make_unique<Player>("Player4");
 
-    std::vector<Player *> players{player1.get(), player2.get(), player3.get(),
-                player4.get()};
+    std::vector<Player *> players{player1.get(), player2.get(), player3.get(), player4.get()};
 
     game->setTotalPlayers(players.size());
 
@@ -50,8 +49,10 @@ int main() {
         #if DEBUG
                 std::cout << "\nRunning simulation #" << match << std::endl;
         #endif
-        while (!game->isGameOver() && round < timeOutRound) {
-            for (const auto &it : players) {
+        while (!game->isGameOver() && round < timeOutRound)
+        {
+            for (const auto &it : players)
+            {
                 game->play(it);
                 const auto rentValue = game->getRentValue();
                 const auto purchaseValue = game->getPurchaseValue();
@@ -66,7 +67,8 @@ int main() {
         totalRounds += round;
 
         const bool isGameTimeout = round == timeOutRound;
-        if (isGameTimeout || game->isGameOver()) {
+        if (isGameTimeout || game->isGameOver())
+        {
             std::vector<std::pair<int, std::string>> players{
                 {player1->getCoins(), player1->getId()},
                 {player2->getCoins(), player2->getId()},
@@ -77,12 +79,15 @@ int main() {
             const auto winner = *std::max_element(players.begin(), players.end());
             const auto playerName = winner.second;
 
-            if (isGameTimeout) {
+            if (isGameTimeout)
+            {
                 std::cout << "In simulation #" << match
                           << " the game ended by time out - The winner is "
                           << playerName << std::endl;
                 countWins[playerName].first += 1;
-            } else {
+            }
+            else
+            {
                 std::cout << "In simulation #" << match << " the game ended in round "
                           << round << " - The winner is " << playerName << std::endl;
                 countWins[playerName].second += 1;
@@ -113,7 +118,8 @@ int main() {
     int totalNormalWins{0};
 
     std::cout << "\nGame analysis:" << std::endl;
-    for (const auto &it : countWins) {
+    for (const auto &it : countWins)
+    {
         const auto playerName = it.first;
         const auto timeOutWins = it.second.first;
         totalTimeOutWins += timeOutWins;

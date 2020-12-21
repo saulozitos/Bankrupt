@@ -3,26 +3,31 @@
 #include <fstream>
 #include <iostream>
 
-Board::Board(const std::string &file)
+Board::Board(const std::string_view &file)
 {
     loadConfigurationFile(file);
 }
 
-void Board::loadConfigurationFile(const std::string_view f)
+void Board::loadConfigurationFile(const std::string_view &fileName)
 {
-    std::ifstream file(f.data());
+    std::ifstream file(fileName.data());
     if(file.is_open())
     {
-        int purchaseValue{0};
-        int rentValue{0};
+        unsigned short purchaseValue{0};
+        unsigned short rentValue{0};
 
         while(file >> purchaseValue >> rentValue)
-            boardData.push_back(std::make_pair(
-                                    std::make_pair(nullptr, true),
-                                    std::make_pair(purchaseValue, rentValue)));
+        {
+            HouseProperty hp;
+            hp.player = nullptr;
+            hp.isAvaiable = true;
+            hp.purchaseValue = purchaseValue;
+            hp.rentValue = rentValue;
+            data.push_back(hp);
+        }
     }
     else
     {
-        std::cout << "Filed to open " << f << std::endl;
+        std::cout << "Filed to open " << fileName << std::endl;
     }
 }

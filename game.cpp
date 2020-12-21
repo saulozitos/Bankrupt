@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <random>
-#include <memory>
 
-Game::Game(const std::string &file) : Board(file),
+Game::Game(const std::string_view &file) :
+    board(std::make_unique<Board>(file)),
     position(0),
     totalPlayers(0),
     isOut(0)
@@ -119,12 +119,12 @@ unsigned short Game::rollDice()
 
 unsigned short Game::getRentValue()
 {
-    return boardData[position].second.second;
+    return board->data[position].rentValue;
 }
 
 unsigned short Game::getPurchaseValue()
 {
-    return boardData[position].second.first;
+    return board->data[position].purchaseValue;
 }
 
 void Game::setTotalPlayers(unsigned short value)
@@ -149,7 +149,7 @@ void Game::resetGame()
 
 bool Game::itsBuyable()
 {
-    return boardData[position].first.second;
+    return board->data[position].isAvaiable;
 }
 
 void Game::setOwner(Player *player)
@@ -157,14 +157,14 @@ void Game::setOwner(Player *player)
 #if DEBUG
     std::cout << player->getId() << " buying property " << position << "!" << std::endl;
 #endif
-    boardData[position].first.first = player;
-    boardData[position].first.second = false;
+    board->data[position].player = player;
+    board->data[position].isAvaiable = false;
     player->setProperties(position);
 }
 
 Player *Game::getOwnerOfProperty()
 {
-    return boardData[position].first.first;
+    return board->data[position].player;
 }
 
 void Game::releaseAcquisitions(Player *player)
@@ -175,7 +175,7 @@ void Game::releaseAcquisitions(Player *player)
         #if DEBUG
             std::cout << "Releasing property " << it << " of " << player->getId() <<std::endl;
         #endif
-        boardData[it].first.first = nullptr;
-        boardData[it].first.second = true;
+        board->data[it].player = nullptr;
+        board->data[it].isAvaiable = true;
     }
 }

@@ -1,15 +1,14 @@
 #pragma once
 
 #include "board.h"
-
 #include <map>
 
 class Player;
 
-class Game : public Board
+class Game
 {
 public:
-    explicit Game(const std::string &file);
+    explicit Game(const std::string_view &file);
     ~Game() = default;
 
     void play(Player *player);
@@ -22,6 +21,7 @@ public:
     void resetGame();
 
 private:
+    std::unique_ptr<Board>board;
     int position;
     unsigned short totalPlayers;
     unsigned short isOut;

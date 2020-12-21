@@ -1,14 +1,24 @@
 #pragma once
 
 #include "player.h"
-#include <utility>
+#include <string_view>
+#include <memory>
 
-class Board {
-protected:
-  explicit Board(const std::string &file);
-  std::vector<std::pair<std::pair<Player *, bool>, std::pair<int, int>>>
-      boardData;
+
+struct HouseProperty
+{
+    Player *player;
+    bool isAvaiable;
+    unsigned short purchaseValue;
+    unsigned short rentValue;
+};
+
+class Board
+{
+public:
+    explicit Board(const std::string_view &file);
+    std::vector<HouseProperty> data;
 
 private:
-  void loadConfigurationFile(const std::string_view f);
+    void loadConfigurationFile(const std::string_view &fileName);
 };
