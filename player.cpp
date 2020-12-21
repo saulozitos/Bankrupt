@@ -38,7 +38,7 @@ std::vector<int> Player::getProperties() const
     return properties;
 }
 
-void Player::setProperties(int &value)
+void Player::addProperties(int &value)
 {
     properties.push_back(value);
 }

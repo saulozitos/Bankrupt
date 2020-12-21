@@ -19,7 +19,7 @@ public:
     void setPosition(int value);
 
     std::vector<int> getProperties() const;
-    void setProperties(int &value);
+    void addProperties(int &value);
 
     bool getIsOut() const;
     void setIsOut(bool value);

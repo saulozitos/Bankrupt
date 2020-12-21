@@ -166,7 +166,7 @@ void Game::setOwner(Player *player)
 #endif
     board->data[position].player = player;
     board->data[position].isAvaiable = false;
-    player->setProperties(position);
+    player->addProperties(position);
 }
 
 Player *Game::getOwnerOfProperty()
