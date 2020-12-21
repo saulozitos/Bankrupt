@@ -127,7 +127,7 @@ bool Game::isGameOver()
 
 void Game::addPlayer(const std::string &playerName)
 {
-    Player * player = new Player(playerName);
+    auto * player = new Player(playerName);
     playersMap.insert({playerName, player});
 }
 

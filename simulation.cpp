@@ -118,7 +118,7 @@ void Simulation::runSimulation()
         const auto normalWins = it.second.second;
         totalNormalWins += normalWins;
         const auto totalWins = timeOutWins + normalWins;
-        const float percentWiner = (totalWins * 100.00) / totalMatch;
+        const auto percentWiner = (totalWins * 100.0) / totalMatch;
 
         std::cout << playerName << " - time out wins: " << timeOutWins
                   << " - normal wins: " << normalWins
