@@ -14,7 +14,6 @@ public:
     void setId(const std::string &value);
 
     int getCoins() const;
-    void setCoins(int value);
 
     int getPosition() const;
     void setPosition(int value);
@@ -27,6 +26,9 @@ public:
 
     bool getShouldIBuy() const;
     void setShouldIBuy(bool value);
+
+    void addCoins(const int value);
+    void removeCoins(const int value);
 
 private:
     std::string id;

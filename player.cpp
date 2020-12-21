@@ -23,11 +23,6 @@ int Player::getCoins() const
     return coins;
 }
 
-void Player::setCoins(int value)
-{
-    coins = value;
-}
-
 int Player::getPosition() const
 {
     return position;
@@ -66,4 +61,14 @@ bool Player::getShouldIBuy() const
 void Player::setShouldIBuy(bool value)
 {
     shouldIBuy = value;
+}
+
+void Player::addCoins(const int value)
+{
+    coins += value;
+}
+
+void Player::removeCoins(const int value)
+{
+    coins -= value;
 }

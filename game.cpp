@@ -20,16 +20,13 @@ void Game::play(Player *player)
     position = rollDice() + player->getPosition();
     if(position > 19)
     {
-        const auto coins  = player->getCoins() + 100;
-        player->setCoins(coins);
+        player->addCoins(100);
         position = position - 19;
     }
 
-    const auto playerCoins = player->getCoins();
-
     #if DEBUG
         std::cout << player->getId() << " in position " << player->getPosition() << " go to position " << position << " - Position information:" << std::endl;
-        std::cout << player->getId() << " - Coins: " << playerCoins << std::endl;
+        std::cout << player->getId() << " - Coins: " << player->getCoins() << std::endl;
     #endif
 
     player->setPosition(position);
@@ -41,9 +38,9 @@ void Game::play(Player *player)
         #endif
 
         const auto purchaseValue = getPurchaseValue();
-        if(playerCoins > purchaseValue)
+        if(player->getCoins() > purchaseValue)
         {
-            player->setCoins(playerCoins - purchaseValue);
+            player->removeCoins(purchaseValue);
             setOwner(player);
         }
         #if DEBUG
@@ -60,29 +57,26 @@ void Game::play(Player *player)
         if(owner != nullptr && player != owner )
         {
             const auto rentValue = getRentValue();
-            if(playerCoins > rentValue)
+            if(player->getCoins() > rentValue)
             {
                 #if DEBUG
                     std::cout << "This position belongs to " << owner->getId() << "! Rental price: " << getRentValue() << " coins!" << std::endl;
                     std::cout<< player->getId() << " making payment of " << rentValue << " coins to " << owner->getId() << std::endl;
                 #endif
-                const auto newCoins = owner->getCoins() + rentValue;
-                player->setCoins(playerCoins - rentValue);
-                owner->setCoins(newCoins);
+                player->removeCoins(rentValue);
+                owner->addCoins(rentValue);
                 #if DEBUG
                     std::cout << player->getId() << " - Coins: " << player->getCoins() << std::endl;
                 #endif
             }
             else
             {
-                const auto newCoins = owner->getCoins() + rentValue;
-
                 #if DEBUG
                     std::cout << "This position belongs to " << owner->getId() << "! Rental price: " << getRentValue() << " coins!" << std::endl;
                     std::cout << player->getId() << " making payment of " << rentValue << " coins to " << owner->getId() << "  and exiting the game!" << std::endl;
                 #endif
 
-                player->setCoins(playerCoins - rentValue);
+                player->removeCoins(rentValue);
                 player->setIsOut(true);
 
                 #if DEBUG
@@ -90,7 +84,7 @@ void Game::play(Player *player)
                 #endif
 
                 isOut ++;
-                owner->setCoins(newCoins);
+                owner->addCoins(rentValue);
                 releaseAcquisitions(player);
             }
         }
