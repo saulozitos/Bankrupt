@@ -31,7 +31,7 @@ void Game::play(Player *player)
 
     player->setPosition(position);
 
-    if(itsBuyable() && player->getShouldIBuy())
+    if(positionIsAvaiable() && player->getShouldIBuy())
     {
         #if DEBUG
         std::cout << "Sale position! Purchase price: " << getPurchaseValue() << " coins - Rental price: " << getRentValue() << " coins!" << std::endl;
@@ -154,7 +154,7 @@ void Game::setShouldIBuy(const std::string_view &name, const bool value)
     playersMap[name.data()]->setShouldIBuy(value);
 }
 
-bool Game::itsBuyable()
+bool Game::positionIsAvaiable()
 {
     return board->data[position].isAvaiable;
 }

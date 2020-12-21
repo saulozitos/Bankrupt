@@ -26,7 +26,7 @@ private:
     int position;
     unsigned short isOut;
     std::map<std::string, Player*>playersMap;
-    bool itsBuyable();
+    bool positionIsAvaiable();
     void setOwner(Player *player);
     Player* getOwnerOfProperty();
     void releaseAcquisitions(Player *player);
