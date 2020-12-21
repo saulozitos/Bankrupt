@@ -6,7 +6,6 @@
 Game::Game(const std::string_view &file) :
     board(std::make_unique<Board>(file)),
     position(0),
-    totalPlayers(0),
     isOut(0)
 {}
 
@@ -127,24 +126,38 @@ unsigned short Game::getPurchaseValue()
     return board->data[position].purchaseValue;
 }
 
-void Game::setTotalPlayers(unsigned short value)
-{
-    totalPlayers = value;
-}
-
 bool Game::isGameOver()
 {
-    return isOut == totalPlayers - 1;
+    return isOut == playersMap.size() - 1;
 }
 
 void Game::addPlayer(const std::string &playerName)
 {
-    playersMap.insert({playerName, std::unique_ptr<Player>(new Player(playerName)).get()});
+    Player * player = new Player(playerName);
+    playersMap.insert({playerName, player});
 }
 
 void Game::resetGame()
 {
+    for(const auto &it : playersMap)
+        delete it.second;
+
     playersMap.erase(playersMap.begin(), playersMap.end());
+}
+
+std::map<std::string, Player *> Game::getPlayersMap()
+{
+    return playersMap;
+}
+
+Player *Game::getPlayer(const std::string_view &name)
+{
+    return playersMap[name.data()];
+}
+
+void Game::setShouldIBuy(const std::string_view &name, const bool value)
+{
+    playersMap[name.data()]->setShouldIBuy(value);
 }
 
 bool Game::itsBuyable()

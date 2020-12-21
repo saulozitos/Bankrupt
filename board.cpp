@@ -18,7 +18,7 @@ void Board::loadConfigurationFile(const std::string_view &fileName)
 
         while(file >> purchaseValue >> rentValue)
         {
-            HouseProperty hp;
+            HouseProperty hp{};
             hp.player = nullptr;
             hp.isAvaiable = true;
             hp.purchaseValue = purchaseValue;

@@ -17,6 +17,8 @@ class Board
 {
 public:
     explicit Board(const std::string_view &file);
+    ~Board() = default;
+
     std::vector<HouseProperty> data;
 
 private:

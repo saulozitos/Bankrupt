@@ -1,7 +1,7 @@
 #include "player.h"
 
-Player::Player(std::string playerId) :
-    id(std::move(playerId)),
+Player::Player(const std::string_view &playerId) :
+    id(playerId),
     coins(300),
     position(-1),
     isOut(false),
