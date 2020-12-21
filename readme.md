@@ -1,12 +1,19 @@
+<!-- Copy and paste the converted output. -->
+
+
 **Instruções de execução/compilação**
 
  
 
  
 
-Baixe o projeto, entre na pasta do projeto e execute:
+Baixe o projeto;
 
- 
+Abra o arquivo main.cpp e indique na linha 10 a localização do arquivo gameConfig.txt.
+
+Salve e feche o arquivo.
+
+Entre na pasta do projeto e execute: 
 
 mkdir build &&cd build
 
