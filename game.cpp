@@ -176,7 +176,6 @@ Player *Game::getOwnerOfProperty()
 
 void Game::releaseAcquisitions(Player *player)
 {
-    const auto proterties = player->getProperties();
     for(const auto &it : player->getProperties())
     {
         #if DEBUG
