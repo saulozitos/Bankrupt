@@ -9,6 +9,15 @@ Game::Game(const std::string_view &file) :
     isOut(0)
 {}
 
+Game::~Game()
+{
+    for(const auto &it : playersMap)
+    {
+        if(it.second != nullptr)
+            delete it.second;
+    }
+}
+
 void Game::play(Player *player)
 {
     if(isGameOver())

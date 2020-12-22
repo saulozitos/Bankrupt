@@ -9,7 +9,7 @@ class Game
 {
 public:
     explicit Game(const std::string_view &file);
-    ~Game() = default;
+    ~Game();
 
     void play(Player *player);
     unsigned short getRentValue();
